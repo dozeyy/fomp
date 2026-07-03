@@ -1,0 +1,229 @@
+.job-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  transition: background var(--transition);
+}
+
+.job-card:hover {
+  background: var(--surface-hover);
+}
+
+.job-card.processing {
+  border-color: rgba(88, 101, 242, 0.2);
+}
+
+.job-card.completed {
+  border-color: rgba(59, 165, 92, 0.15);
+}
+
+.job-card.failed {
+  border-color: rgba(237, 66, 69, 0.2);
+}
+
+/* Icon */
+.job-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  background: var(--surface-active);
+}
+
+.job-icon.image { background: rgba(88, 101, 242, 0.12); color: #7289da; }
+.job-icon.video { background: rgba(237, 66, 69, 0.12); color: #ed4245; }
+.job-icon.audio { background: rgba(250, 166, 26, 0.12); color: #faa61a; }
+.job-icon.document { background: rgba(59, 165, 92, 0.12); color: #3ba55c; }
+.job-icon.archive { background: rgba(155, 89, 182, 0.12); color: #9b59b6; }
+
+/* Info */
+.job-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.job-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.job-name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.job-stage {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 3px;
+}
+
+.job-stats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.stat-original { color: var(--text-tertiary); }
+.stat-arrow { color: var(--text-tertiary); }
+.stat-output { color: var(--text-secondary); font-weight: 500; }
+.stat-ratio { color: var(--success); font-weight: 600; }
+.stat-ratio.at-limit { color: var(--text-tertiary); font-weight: 500; }
+.stat-already-under { color: var(--text-secondary); font-size: 11.5px; }
+
+.job-error {
+  font-size: 11.5px;
+  color: var(--danger);
+  margin-top: 3px;
+}
+
+/* Right */
+.job-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.job-complete-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.job-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.job-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.job-btn.cancel:hover {
+  background: var(--danger-subtle);
+  border-color: rgba(237, 66, 69, 0.3);
+  color: var(--danger);
+}
+
+.job-btn.download {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  width: auto;
+  padding: 0 12px;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+.job-btn.download:hover:not(:disabled) {
+  background: var(--accent-hover, #4752c4);
+  border-color: var(--accent-hover, #4752c4);
+  color: #fff;
+}
+
+.job-btn.download:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Badge */
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge.success {
+  background: var(--success-subtle);
+  color: var(--success);
+  border: 1px solid rgba(59, 165, 92, 0.25);
+}
+
+.badge.warning {
+  background: var(--warning-subtle);
+  color: var(--warning);
+  border: 1px solid rgba(250, 166, 26, 0.25);
+}
+
+.badge.neutral {
+  background: var(--surface-hover);
+  color: var(--text-tertiary);
+  border: 1px solid var(--border);
+}
+
+/* Progress bar */
+.job-progress-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.job-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #7289da);
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.job-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  to { left: 250%; }
+}
