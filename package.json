@@ -1,6 +1,6 @@
 {
   "name": "fomp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Compress any file to a target size instantly",
   "main": "out/main/index.js",
   "author": "dozeyy",
