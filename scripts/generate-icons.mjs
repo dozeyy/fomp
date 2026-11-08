@@ -9,27 +9,18 @@ const root = join(__dirname, '..')
 const buildDir = join(root, 'build')
 mkdirSync(buildDir, { recursive: true })
 
-// Matches the AppIcon component design scaled to 512×512.
-// Coordinates are AppIcon 32×32 values × 16.
-const SVG = `<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+// Same design as the AppIcon component (1024 grid), rendered at 512×512.
+// A file squeezed between two chevrons on a white rounded square.
+const SVG = `<svg width="512" height="512" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
-  <rect width="512" height="512" rx="112" fill="#0F1016"/>
+  <rect width="1024" height="1024" rx="228" fill="#FFFFFF"/>
 
-  <!-- Large file with corner fold (original file) -->
-  <path d="M120 48 H312 L400 136 V248 H120 Z" fill="#5865F2"/>
-  <!-- Corner fold highlight -->
-  <path d="M312 48 L312 136 L400 136" fill="rgba(255,255,255,0.15)"/>
-  <!-- Subtle document lines inside the file body -->
-  <line x1="152" y1="100" x2="296" y2="100" stroke="rgba(255,255,255,0.22)" stroke-width="14" stroke-linecap="round"/>
-  <line x1="152" y1="152" x2="368" y2="152" stroke="rgba(255,255,255,0.16)" stroke-width="14" stroke-linecap="round"/>
-  <line x1="152" y1="204" x2="312" y2="204" stroke="rgba(255,255,255,0.11)" stroke-width="14" stroke-linecap="round"/>
+  <!-- File with its corner fold -->
+  <path d="M352 206L570 206A8 8 0 0 1 578 214L578 365A50 50 0 0 0 628 415L716 415A8 8 0 0 1 724 423L724 767A52 52 0 0 1 672 819L352 819A52 52 0 0 1 300 767L300 258A52 52 0 0 1 352 206Z" fill="#F39841"/>
+  <path d="M598 249.91L598 365A30 30 0 0 0 628 395L716.87 395A14 14 0 0 0 727.8 372.25L622.93 241.17A14 14 0 0 0 598 249.91Z" fill="#F39841"/>
 
-  <!-- Downward arrow (compression action) -->
-  <line x1="256" y1="264" x2="256" y2="320" stroke="#5865F2" stroke-width="29" stroke-linecap="round"/>
-  <path d="M208 288 L256 336 L304 288" stroke="#5865F2" stroke-width="29" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-
-  <!-- Smaller output file (compressed result) -->
-  <rect x="176" y="368" width="160" height="88" rx="24" fill="#5865F2" opacity="0.6"/>
+  <!-- Chevrons pressing in (compression) -->
+  <path d="M142 425L220 512L142 598M882 425L804 512L882 598" stroke="#F39841" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`
 
 async function main() {

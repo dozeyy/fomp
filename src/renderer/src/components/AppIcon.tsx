@@ -2,36 +2,31 @@ interface Props {
   size?: number
 }
 
+// Same design as build/icon.png (scripts/generate-icons.mjs), on a 1024 grid.
 export function AppIcon({ size = 32 }: Props) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 32 32"
+      viewBox="0 0 1024 1024"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* Background */}
-      <rect width="32" height="32" rx="7" fill="#0F1016" />
+      <rect width="1024" height="1024" rx="228" fill="#FFFFFF" />
 
-      {/* Large file shape with folded corner — represents original file */}
-      <path d="M7.5 3 H19.5 L25 8.5 V15.5 H7.5 Z" fill="#5865F2" />
-      {/* Corner fold highlight */}
-      <path d="M19.5 3 L19.5 8.5 L25 8.5" fill="rgba(255,255,255,0.15)" />
+      {/* File with its corner fold */}
+      <path d="M352 206L570 206A8 8 0 0 1 578 214L578 365A50 50 0 0 0 628 415L716 415A8 8 0 0 1 724 423L724 767A52 52 0 0 1 672 819L352 819A52 52 0 0 1 300 767L300 258A52 52 0 0 1 352 206Z" fill="#F39841" />
+      <path d="M598 249.91L598 365A30 30 0 0 0 628 395L716.87 395A14 14 0 0 0 727.8 372.25L622.93 241.17A14 14 0 0 0 598 249.91Z" fill="#F39841" />
 
-      {/* Downward arrow — the compression action */}
-      <path d="M16 16.5 V20" stroke="#5865F2" strokeWidth="1.8" strokeLinecap="round" />
+      {/* Chevrons pressing in — the compression action */}
       <path
-        d="M13 18 L16 21 L19 18"
-        stroke="#5865F2"
-        strokeWidth="1.8"
-        fill="none"
+        d="M142 425L220 512L142 598M882 425L804 512L882 598"
+        stroke="#F39841"
+        strokeWidth="64"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-
-      {/* Smaller output file — represents the compressed result */}
-      <rect x="11" y="23" width="10" height="5.5" rx="1.5" fill="#5865F2" opacity="0.6" />
     </svg>
   )
 }
