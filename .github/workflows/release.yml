@@ -6,6 +6,15 @@ on:
   push:
     tags: ['v*']
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Publish as this release tag (e.g. v1.2.3); leave empty to only build"
+        required: false
+        default: ""
+      notes:
+        description: "Release notes (used with tag)"
+        required: false
+        default: ""
 permissions:
   contents: write
 jobs:
@@ -30,10 +39,18 @@ jobs:
           retention-days: 7
 
       - name: Publish the release
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/v') || inputs.tag != ''
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG_INPUT: ${{ inputs.tag }}
+          NOTES_INPUT: ${{ inputs.notes }}
         run: |
-          gh release create "$GITHUB_REF_NAME" release/Fomp-Setup-*.exe \
-            --title "Fomp $GITHUB_REF_NAME" --notes-from-tag --verify-tag
+          if [ -n "$TAG_INPUT" ]; then
+            # Started by hand with a tag: GitHub creates the tag on this commit.
+            gh release create "$TAG_INPUT" release/Fomp-Setup-*.exe \
+              --target "$GITHUB_SHA" --title "Fomp $TAG_INPUT" --notes "$NOTES_INPUT"
+          else
+            gh release create "$GITHUB_REF_NAME" release/Fomp-Setup-*.exe \
+              --title "Fomp $GITHUB_REF_NAME" --notes-from-tag --verify-tag
+          fi
